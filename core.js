@@ -64,6 +64,7 @@ var basher = (function() {
         if (t.has_mob(t.target)) return;
         if (!t.has_mob(t.target)) t.target = '';
         if (t.bashables()[0]) t.target = t.bashables()[0].id;
+        client.send_direct('st ' + t.target); 
     };
 
     t.get_worst_sys = function() {
