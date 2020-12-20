@@ -5,6 +5,7 @@ var basher = (function() {
         'Engineer':{
             'heal':function() {return t.getAttack()},
             'attack':function() {return 'bot claw'},
+            'interrupt':function() {return 'gadget shock'}
         },
         'Fury':{
             'heal': function() {return 'kith suffuse'},
@@ -79,6 +80,10 @@ var basher = (function() {
 
     t.getAttack = function() {
         return t.classes[t.class].attack()
+    }
+    
+    t.getInterrupt = function() {
+        return t.classes[t.class].interrupt()
     }
 
     t.fight = function() {
