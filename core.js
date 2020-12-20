@@ -30,7 +30,8 @@ var basher = (function() {
     t.class = client.get_variable("my_class")
     t.target = '';
 
-    t.bashables = function() { return {'The Ixsei Desert':['a crystal-clawed rock giant', 'a salt-crusted rock creeper']} };
+    t.bashables = function() { return client.get_item_list("room", "m", "x") };
+    
     t.get_area_priority = function() {
         const area = gmcp.Room.Info.area;
         const areas = {
@@ -41,6 +42,7 @@ var basher = (function() {
         }
         return areas[area]
     };
+
     t.populate_tList = function() {
         t.tList = [];
         const bashables = t.bashables();
