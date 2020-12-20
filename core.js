@@ -39,6 +39,7 @@ var basher = (function() {
                 "a salt-crusted quartz creeper",
             ]
         }
+        return areas[area]
     };
     t.populate_tList = function() {
         t.tList = [];
