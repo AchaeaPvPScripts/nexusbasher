@@ -97,4 +97,5 @@ var basher = (function() {
             }
         }
     };
+    return t
 }());
