@@ -1,4 +1,4 @@
-const basher = (function() {
+var basher = (function() {
     const t = {};
 
     t.classes = {
