@@ -32,9 +32,13 @@ var basher = (function() {
 
     t.bashables = function() { return {'The Ixsei Desert':['a crystal-clawed rock giant', 'a salt-crusted rock creeper']} };
     t.get_area_priority = function() {
-        const area = client.get_variable('basher area');
-        const bashable = client.get_variable('basher ' + area).split(',');
-        return bashable;
+        const area = gmcp.Room.Info.area;
+        const areas = {
+            'The Ixsei Desert':[
+                "a crystal-clawed rock giant",
+                "a salt-crusted quartz creeper",
+            ]
+        }
     };
     t.populate_tList = function() {
         t.tList = [];
