@@ -30,7 +30,7 @@ var basher = (function() {
     t.class = client.get_variable("my_class")
     t.target = '';
 
-    t.bashables = function() { return client.get_item_list("room", "m", "x") };
+    t.bashables = function() { return {'The Ixsei Desert':['a crystal-clawed rock giant', 'a salt-crusted rock creeper']} };
     t.get_area_priority = function() {
         const area = client.get_variable('basher area');
         const bashable = client.get_variable('basher ' + area).split(',');
