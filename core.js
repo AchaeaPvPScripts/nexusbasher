@@ -100,6 +100,7 @@ var basher = (function() {
     }
 
     t.fight = function() {
+        t.acquire_target();
         if (t.target != '') {
             const needsMend = t.get_worst_sys();
             const needsHeal = t.get_hp();
