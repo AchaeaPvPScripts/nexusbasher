@@ -1,5 +1,28 @@
 const basher = (function() {
     const t = {};
+
+    t.classes = {
+        'Engineer':{
+            'heal':function() {return t.getAttack()},
+            'attack':function() {return 'bot claw'},
+        },
+        'Fury':{
+            'heal': function() {return 'kith suffuse'},
+            'attack': function() {},
+        },
+        'BEAST':{
+            'heal': function() {return 'suit support'},
+            'attack': function() {},
+        },
+        'Scoundrel':{
+            'heal': function() {return 'guile stim'},
+            'attack': function() {},
+        },
+        'Nanoseer':{
+            'heal': function() {return 'nano repair'},
+            'attack': function() {return 'void freeze'},
+        }
+    };
     t.tList = [];
     t.go = false;
     t.fighting = false;
@@ -36,7 +59,13 @@ const basher = (function() {
     };
 
     t.get_worst_sys = function() {
-
+        const systems = ["wetwiring", "muscular", "internal", "mind", "sensory"]
+        for (sys of systems) {
+            const s = gmcp.Char.Vitals.systems[sys]
+            if ((s.health < 92.5) && (s.efficacy == 100) && (gmcp.Char.Vitals.ww == "1")) {
+                return sys
+            }
+        }
     };
 
     t.get_hp = function() {
@@ -47,6 +76,10 @@ const basher = (function() {
             return t.classes[t.class].heal
         }
     };
+
+    t.getAttack = function() {
+        return t.classes[t.class].attack()
+    }
 
     t.fight = function() {
         if (t.target != '') {
