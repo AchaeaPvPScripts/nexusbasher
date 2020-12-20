@@ -5,22 +5,27 @@ var basher = (function() {
         'Engineer':{
             'heal':function() {return t.getAttack()},
             'attack':function() {return 'bot claw'},
+            'can_heal':function() { return true },
             'interrupt':function() {return 'gadget shock'}
         },
         'Fury':{
             'heal': function() {return 'kith suffuse'},
+            'can_heal':function() { return true },
             'attack': function() {},
         },
         'BEAST':{
             'heal': function() {return 'suit support'},
+            'can_heal':function() { return true },
             'attack': function() {},
         },
         'Scoundrel':{
             'heal': function() {return 'guile stim'},
+            'can_heal':function() { return true },
             'attack': function() {},
         },
         'Nanoseer':{
             'heal': function() {return 'nano repair'},
+            'can_heal':function() { return true },
             'attack': function() {return 'void freeze'},
         }
     };
@@ -40,7 +45,7 @@ var basher = (function() {
                 "a salt-crusted quartz creeper",
             ]
         }
-        return areas[area]
+        return areas[area] || [];
     };
 
     t.populate_tList = function() {
@@ -82,7 +87,7 @@ var basher = (function() {
         const hpm = client.get_variable('my_maxhp');
         const hpp = hp/hpm
         if ((hpp < .80) && t.classes[t.class].can_heal()) {
-            return t.classes[t.class].heal
+            return t.classes[t.class].heal()
         }
     };
 
