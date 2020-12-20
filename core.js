@@ -100,6 +100,9 @@ var basher = (function() {
             } else {
                 client.send_direct(t.getAttack());
             }
+        } else {
+            t.acquire_target();
+            t.fight();
         }
     };
     return t
