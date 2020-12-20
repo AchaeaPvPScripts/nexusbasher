@@ -48,7 +48,7 @@ var basher = (function() {
         const bashables = t.bashables();
         const prio = t.get_area_priority();
         for (x of prio) {
-            for (y of bashables) { t.tList.push(y.id) };
+            for (y of bashables) { if (y.name == x) {t.tList.push(y.id)} };
         };
     };
 
