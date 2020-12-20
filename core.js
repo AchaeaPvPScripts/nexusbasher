@@ -62,7 +62,7 @@ var basher = (function() {
         for (x of t.bashables()) {
             y.push(x.id);
         };
-        if (!y.includes(id)) return false;
+        if (y.includes(id)) return true;
     };
 
     t.acquire_target = function() {
