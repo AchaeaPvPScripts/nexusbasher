@@ -68,7 +68,7 @@ var basher = (function() {
     t.acquire_target = function() {
         if (t.has_mob(t.target)) return;
         if (!t.has_mob(t.target)) t.target = '';
-        if (t.bashables()[0]) t.target = t.bashables()[0].id;
+        if (t.tList[0]) t.target = t.tList[0];
         client.send_direct('st ' + t.target); 
     };
 
