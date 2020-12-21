@@ -134,8 +134,8 @@ var queue = (function() {
     };
 
     q.process = function() {
-        if (q.queued == q.last_queued) return;
-        if (!(q.queued == q.last_queued)) {
+        if (q.queued.toLowerCase() == q.last_queued.toLowerCase()) return;
+        if (!(q.queued.toLowerCase() == q.last_queued.toLowerCase())) {
             client.send_direct(q.queued);
         }
     }
