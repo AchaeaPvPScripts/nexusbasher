@@ -105,15 +105,17 @@ var basher = (function() {
             const needsMend = t.get_worst_sys();
             const needsHeal = t.get_hp();
             t.fighting = true;
+            let command = '';
             if (t.interrupting) {
-                client.send_direct(t.getInterrupt());
+                command = t.getInterrupt();
             } else if (needsMend) {
-                client.send_direct('ww mend ' + needsMend);
+                command = 'ww mend ' + needsMend;
             } else if (needsHeal) {
-                client.send_direct(needsHeal);
+                command = needsHeal;
             } else {
-                client.send_direct(t.getAttack());
+                command = t.getAttack();
             }
+            if (!(q.last_queued == command)) q.queue(command);
         } else {
             t.acquire_target();
             t.fight();
@@ -127,9 +129,9 @@ var queue = (function() {
     const q = {};
     q.q = {};
     q.queued = false;
-
+    q.last_queued = '';
     q.queue = function() {
-        for (i=1; i<arguments.length; i++) {
+        for (i=0; i<arguments.length; i++) {
             q.q.push(arguments[i]);
         };
         q.process();
@@ -138,8 +140,8 @@ var queue = (function() {
     q.process = function() {
         if (!q.q[0]) {return}
         if (!q.queued) {
-            q.last_queued = q.q.pop()
-            send_direct(q.last_queued)
+            q.last_queued = q.q.pop();
+            client.send_direct(q.last_queued);
         }
     }
 }());
