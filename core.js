@@ -118,6 +118,28 @@ var basher = (function() {
             t.acquire_target();
             t.fight();
         }
-    };
+    }; 
+
     return t
+}());
+
+var queue = (function() {
+    const q = {};
+    q.q = {};
+    q.queued = false;
+
+    q.queue = function() {
+        for (i=1; i<arguments.length; i++) {
+            q.q.push(arguments[i]);
+        };
+        q.process();
+    }
+
+    q.process = function() {
+        if (!q.q[0]) {return}
+        if (!q.queued) {
+            q.last_queued = q.q.pop()
+            send_direct(q.last_queued)
+        }
+    }
 }());
