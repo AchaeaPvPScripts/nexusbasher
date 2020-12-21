@@ -116,7 +116,7 @@ var basher = (function() {
                 command = t.getAttack();
             }
             if (!(q.last_queued == command)) q.queue(command);
-        } else {
+        } else if (t.tList[0]) {
             t.acquire_target();
             t.fight();
         }
