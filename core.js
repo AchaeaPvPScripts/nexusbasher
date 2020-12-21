@@ -144,4 +144,5 @@ var queue = (function() {
             client.send_direct(q.last_queued);
         }
     }
+    return q;
 }());
