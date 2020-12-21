@@ -35,7 +35,7 @@ var basher = (function() {
     t.class = client.get_variable("my_class")
     t.target = '';
 
-    t.bashables = function() { return client.get_item_list("room", "m", "x") };
+    t.bashables = function() { return gmcp.mobs };
     
     t.get_area_priority = function() {
         const area = gmcp.Room.Info.area;
@@ -53,14 +53,14 @@ var basher = (function() {
         const bashables = t.bashables();
         const prio = t.get_area_priority();
         for (x of prio) {
-            for (y of bashables) { if (y.text.match(x)) {t.tList.push(y.id)} };
+            for (y in bashables) { if (bashables[y].match(x)) {t.tList.push(y)} };
         };
     };
 
     t.has_mob = function(id) {
         const y = [];
-        for (x of t.bashables()) {
-            y.push(x.id);
+        for (x in t.bashables()) {
+            y.push(x);
         };
         if (y.includes(id)) return true;
     };
@@ -128,6 +128,7 @@ var basher = (function() {
 var queue = (function() {
     const q = {};
     q.queued = '';
+    q.last_queued = '';
     q.queue = function(what) {
         q.queued = what;
         queue.process()
