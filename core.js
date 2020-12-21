@@ -127,7 +127,7 @@ var basher = (function() {
 
 var queue = (function() {
     const q = {};
-    q.q = {};
+    q.q = [];
     q.queued = false;
     q.last_queued = '';
     q.queue = function() {
