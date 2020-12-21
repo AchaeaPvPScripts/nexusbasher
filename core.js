@@ -66,6 +66,7 @@ var basher = (function() {
     };
 
     t.acquire_target = function() {
+        t.populate_tList();
         if (t.has_mob(t.target)) return;
         if (!t.has_mob(t.target)) t.target = '';
         if (t.tList[0]) t.target = t.tList[0];
@@ -100,7 +101,6 @@ var basher = (function() {
     }
 
     t.fight = function() {
-        t.acquire_target();
         if (t.target != '') {
             const needsMend = t.get_worst_sys();
             const needsHeal = t.get_hp();
