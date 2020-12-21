@@ -115,7 +115,7 @@ var basher = (function() {
             } else {
                 command = t.getAttack();
             }
-            if (!(queue.last_queued == command)) queue.queue(command);
+            queue.queue(command);
         } else if (t.tList[0]) {
             t.acquire_target();
             t.fight();
@@ -127,21 +127,16 @@ var basher = (function() {
 
 var queue = (function() {
     const q = {};
-    q.q = [];
-    q.queued = false;
-    q.last_queued = '';
-    q.queue = function() {
-        for (i=0; i<arguments.length; i++) {
-            q.q.push(arguments[i]);
-        };
-        q.process();
-    }
+    q.queued = '';
+    q.queue = function(what) {
+        q.queued = what;
+        queue.process()
+    };
 
     q.process = function() {
-        if (!q.q[0]) {return}
-        if (!q.queued) {
-            q.last_queued = q.q.pop();
-            client.send_direct(q.last_queued);
+        if (q.queued == queue.last_queued) return;
+        if (!(q.queued == queue.last_queued)) {
+            client.send_direct(q.queued);
         }
     }
     return q;
